@@ -1,2 +1,7 @@
 <h1>Uni-organizer</h1>
-<lib-term></lib-term>
+<p>Wybierz swój semestr</p>
+@for (term of terms; track term.id){
+
+<button>{{term.name}}</button>    
+}
+
