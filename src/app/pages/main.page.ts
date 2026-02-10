@@ -1,10 +1,9 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import { inject } from '@angular/core';
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 
 @Component({ 
   selector: 'app-main-page', 
   templateUrl: './main.page.html', 
+  imports: [],
   encapsulation: ViewEncapsulation.None, 
   changeDetection: ChangeDetectionStrategy.OnPush })
 export class MainPage {
@@ -16,5 +15,5 @@ export class MainPage {
     {id: "sem6", name: "Semestr 6"},
     {id: "sem7", name: "Semestr 7"},
   ]
-  
+
 }
