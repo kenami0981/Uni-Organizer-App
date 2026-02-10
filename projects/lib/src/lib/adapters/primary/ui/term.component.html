@@ -1,1 +1,10 @@
-Test
+<ul>
+      <li *ngFor="let semester of semesters$ | async">
+        <button (click)="onSemesterClicked(semester.id)">{{ semester.name }}</button>
+      </li>
+    </ul>
+    <ul>
+      <li *ngFor="let subject of subjects$ | async">
+        {{ subject.name }}
+      </li>
+    </ul>
