@@ -17,4 +17,7 @@ export class TermComponent {
 onSemesterClicked(semesterID: string) {
     this.subjects$ = this.subjectService.getSubjects(semesterID);
   }
+  addSemester(value:string) {
+    this.semesterService.addSemester(value);
+  }
 }

@@ -1,3 +1,6 @@
+<input placeholder="add semester" type="text" #inputRef>
+<button (click)="addSemester(inputRef.value)">Submit</button>
+
 <ul>
       <li *ngFor="let semester of semesters$ | async">
         <button (click)="onSemesterClicked(semester.id)">{{ semester.name }}</button>

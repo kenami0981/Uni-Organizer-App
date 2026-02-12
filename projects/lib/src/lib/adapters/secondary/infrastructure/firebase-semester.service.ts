@@ -9,10 +9,15 @@ import { SemesterDTO } from '../../../application/ports/secondary/semester.dto';
 export class FirebaseSemesterService {
   private firestore = inject(Firestore);
   private semestersRef = collection(this.firestore, 'semesters');
-
   getSemesters(): Observable<SemesterDTO[]> {
     return collectionData(this.semestersRef,{
       idField: 'id',
     }) as Observable<SemesterDTO[]>;
+  }
+  addSemester(nameOfSemester: string) {
+    addDoc(collection(this.firestore, 'semesters'), {
+      name: nameOfSemester,
+    });
+  
   }
 }
