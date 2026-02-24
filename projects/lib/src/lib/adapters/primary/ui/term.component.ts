@@ -2,9 +2,11 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy, inject } from '@
 import { FirebaseSemesterService } from "../../secondary/infrastructure/firebase-semester.service"
 import { FirebaseSubjectService } from "../../secondary/infrastructure/firebase-subject.service"
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+
 @Component({ 
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, RouterLink],
     selector: 'lib-term', 
     templateUrl: './term.component.html', 
     encapsulation: ViewEncapsulation.None, 
@@ -15,7 +17,7 @@ export class TermComponent {
   semesters$ = this.semesterService.getSemesters();
   subjects$ : any;
 onSemesterClicked(semesterID: string) {
-    this.subjects$ = this.subjectService.getSubjects(semesterID);
+    this.subjects$ = this.subjectService.getSubjects(semesterID);   
   }
   addSemester(value:string) {
     this.semesterService.addSemester(value);

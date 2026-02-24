@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, addDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, query, orderBy } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { SemesterDTO } from '../../../application/ports/secondary/semester.dto';
 
@@ -10,7 +10,7 @@ export class FirebaseSemesterService {
   private firestore = inject(Firestore);
   private semestersRef = collection(this.firestore, 'semesters');
   getSemesters(): Observable<SemesterDTO[]> {
-    return collectionData(this.semestersRef,{
+    return collectionData(query(this.semestersRef, orderBy('name', 'asc')),{
       idField: 'id',
     }) as Observable<SemesterDTO[]>;
   }

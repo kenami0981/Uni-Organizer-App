@@ -3,11 +3,12 @@
 
 <ul>
       <li *ngFor="let semester of semesters$ | async">
-        <button (click)="onSemesterClicked(semester.id)">{{ semester.name }}</button>
+        <button (click)="onSemesterClicked(semester.id)" [routerLink]="['/semestr', (semester.name.slice(-1))]">{{ semester.name }}</button>
       </li>
     </ul>
     <ul>
       <li *ngFor="let subject of subjects$ | async">
         {{ subject.name }}
       </li>
+      
     </ul>
