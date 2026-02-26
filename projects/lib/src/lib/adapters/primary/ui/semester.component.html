@@ -1,0 +1,9 @@
+
+<ul>
+      <li *ngFor="let subject of subjects$ | async">
+        {{ subject.name }}
+      </li>
+      
+    </ul>
+    <input placeholder="add subject" type="text" #inputRef>
+    <button (click)="addSubject(inputRef.value)">Dodaj</button>

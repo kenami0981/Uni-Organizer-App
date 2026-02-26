@@ -13,12 +13,9 @@ import { RouterLink } from '@angular/router';
     changeDetection: ChangeDetectionStrategy.OnPush })
 export class TermComponent {
     private semesterService = inject(FirebaseSemesterService);
-    private subjectService = inject(FirebaseSubjectService);
-  semesters$ = this.semesterService.getSemesters();
-  subjects$ : any;
-onSemesterClicked(semesterID: string) {
-    this.subjects$ = this.subjectService.getSubjects(semesterID);   
-  }
+    semesters$ = this.semesterService.getSemesters();
+
+
   addSemester(value:string) {
     this.semesterService.addSemester(value);
   }

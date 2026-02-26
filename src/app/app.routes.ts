@@ -7,7 +7,7 @@ export const routes: Routes = [
     component: MainPage,
 },
 {
-    path: 'semestr/:id',
+    path: 'semester/:id',
     component: SemesterPage,
 }
 
