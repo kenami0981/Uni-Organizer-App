@@ -2,10 +2,11 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy, inject } from '@
 import { Router } from '@angular/router';
 import { FirebaseSubjectService } from '../../secondary/infrastructure/firebase-subject.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 @Component({ 
     selector: 'lib-semester', 
     templateUrl: './semester.component.html', 
-    imports: [CommonModule],
+    imports: [CommonModule, RouterLink],
     encapsulation: ViewEncapsulation.None, 
     changeDetection: ChangeDetectionStrategy.OnPush ,
     standalone: true})

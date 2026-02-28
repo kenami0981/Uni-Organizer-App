@@ -1,7 +1,7 @@
 
 <ul>
       <li *ngFor="let subject of subjects$ | async">
-        {{ subject.name }}
+        <button [routerLink]="['subject', subject.id]">{{ subject.name }}</button>
       </li>
       
     </ul>

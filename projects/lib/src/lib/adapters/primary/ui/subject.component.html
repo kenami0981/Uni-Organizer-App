@@ -1,0 +1,5 @@
+<ul>
+    <li *ngFor="let note1 of notes$ | async">{{note1.note}}</li>
+</ul>
+<input placeholder="add note" type="text" #inputRef>
+<button (click)="addNote(inputRef.value)">Dodaj</button>
