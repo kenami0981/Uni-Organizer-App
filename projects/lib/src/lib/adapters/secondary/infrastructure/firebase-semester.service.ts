@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, addDoc, query, orderBy, deleteDoc, doc, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, query, orderBy, deleteDoc, doc, getDocs, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { SemesterDTO } from '../../../application/ports/secondary/semester.dto';
 
@@ -20,8 +20,10 @@ export class FirebaseSemesterService {
     });
   
 }
-editSemester(semesterID: string) {
-    
+editSemester(semesterID: string, newName: string) {
+    updateDoc(doc(this.firestore,'semesters/'+semesterID), {
+      name: newName,
+    });
   }
   async deleteSemester(semesterID: string) {
     const subjectRef = collection(this.firestore,'semesters/'+semesterID+'/subjects');

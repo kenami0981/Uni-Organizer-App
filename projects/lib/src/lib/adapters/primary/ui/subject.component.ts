@@ -33,4 +33,8 @@ private route = inject(ActivatedRoute);
     deleteNote(noteID: string) {
     this.notesService.deleteNote(this.SemesterID, this.SubjectID,noteID);
   }
+  editNote(noteID: string, newNote: string) {
+    
+    this.notesService.editNote(this.SemesterID, this.SubjectID,noteID, newNote);
+  }
 }

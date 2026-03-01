@@ -5,6 +5,9 @@
       <li *ngFor="let semester of semesters$ | async">
         <button [routerLink]="['/semester', semester.id]">{{ semester.name }}</button>
         <button (click)="deleteSemester(semester.id)">Delete</button>
+        <input placeholder="Edit Semester" type="text" #inputEdit>
+        <button (click)="editSemester(semester.id, inputEdit.value)">Edit</button>
+        
       </li>
     </ul>
     

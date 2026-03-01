@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FirebaseSemesterService } from "../../secondary/infrastructure/firebase-semester.service"
-import { FirebaseSubjectService } from "../../secondary/infrastructure/firebase-subject.service"
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -18,6 +17,10 @@ export class TermComponent {
 
   addSemester(value:string) {
     this.semesterService.addSemester(value);
+  }
+  editSemester(semesterID: string, newName: string) {
+    
+    this.semesterService.editSemester(semesterID, newName);
   }
   deleteSemester(semesterID: string) {
     this.semesterService.deleteSemester(semesterID);

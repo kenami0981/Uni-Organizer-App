@@ -1,6 +1,8 @@
 <ul>
     <li *ngFor="let note of notes$ | async">{{note.note}}
         <button (click)="deleteNote(note.id)">Delete</button>
+        <input placeholder="Edit Note" type="text" #inputEdit>
+        <button (click)="editNote(note.id, inputEdit.value)">Edit</button>
     </li>
     
 </ul>

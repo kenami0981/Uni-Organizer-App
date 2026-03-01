@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDocs, orderBy, query, serverTimestamp } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDocs, orderBy, query, serverTimestamp, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { SubjectDTO } from '../../../application/ports/secondary/subject.dto';
 
@@ -21,6 +21,11 @@ export class FirebaseSubjectService {
       createdAt: serverTimestamp()
     });
   
+  }
+  editSubject(semesterID: string, subjectID:string, newName: string) {
+    updateDoc(doc(this.firestore,'semesters/'+semesterID+'/subjects/'+subjectID), {
+      name: newName,
+    });
   }
   async deleteSubject(semesterID: string, subjectID:string) {
     const notesRef = collection(this.firestore,'semesters/'+semesterID+'/subjects/'+subjectID+'/notes');

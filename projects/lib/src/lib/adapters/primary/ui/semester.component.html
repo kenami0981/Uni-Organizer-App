@@ -3,6 +3,8 @@
       <li *ngFor="let subject of subjects$ | async">
         <button [routerLink]="['subject', subject.id]">{{ subject.name }}</button>
         <button (click)="deleteSubject(subject.id)">Delete</button>
+        <input placeholder="Edit Subejct Name" type="text" #inputEdit>
+        <button (click)="editSubject(subject.id, inputEdit.value)">Edit</button>
       </li>
       
     </ul>

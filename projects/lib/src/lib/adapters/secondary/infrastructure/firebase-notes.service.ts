@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, serverTimestamp } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, serverTimestamp, updateDoc } from '@angular/fire/firestore';
 import { NotesDTO } from '../../../application/ports/secondary/notes.dto';
 import { Observable } from 'rxjs';
 @Injectable({
@@ -21,6 +21,11 @@ export class FirebaseNotesService {
       createdAt: serverTimestamp()
     });
   
+  }
+  editNote(semesterID: string, subjectID:string, noteID: string, newNote: string) {
+    updateDoc(doc(this.firestore,'semesters/'+semesterID+'/subjects/'+subjectID+'/notes/'+noteID), {
+      note: newNote,
+    });
   }
   deleteNote(semesterID: string, subjectID:string, noteID: string) {
     deleteDoc(doc(this.firestore, 'semesters/'+semesterID+'/subjects/'+subjectID+'/notes/'+noteID));  }

@@ -22,6 +22,10 @@ export class SemesterComponent {
     addSubject(SubjectName: string) {
         this.subjectService.addSubject(SubjectName, this.SemesterID);
     }
+    editSubject(SubjectID: string, newNote: string) {
+    
+    this.subjectService.editSubject(this.SemesterID,SubjectID, newNote);
+  }
     deleteSubject(subjectID: string) {
     this.subjectService.deleteSubject(this.SemesterID, subjectID );
   }
