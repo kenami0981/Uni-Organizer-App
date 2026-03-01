@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, orderBy, query, serverTimestamp } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDocs, orderBy, query, serverTimestamp } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { SubjectDTO } from '../../../application/ports/secondary/subject.dto';
 
@@ -22,6 +22,13 @@ export class FirebaseSubjectService {
     });
   
   }
+  async deleteSubject(semesterID: string, subjectID:string) {
+    const notesRef = collection(this.firestore,'semesters/'+semesterID+'/subjects/'+subjectID+'/notes');
+    const snapshot = await getDocs(notesRef);
+    const deletions = snapshot.docs.map(d => deleteDoc(d.ref));
+    await Promise.all(deletions);
+    deleteDoc(doc(this.firestore, 'semesters/'+semesterID+'/subjects/'+subjectID));  
+    }
   }
  
 

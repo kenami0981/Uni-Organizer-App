@@ -2,6 +2,7 @@
 <ul>
       <li *ngFor="let subject of subjects$ | async">
         <button [routerLink]="['subject', subject.id]">{{ subject.name }}</button>
+        <button (click)="deleteSubject(subject.id)">Delete</button>
       </li>
       
     </ul>

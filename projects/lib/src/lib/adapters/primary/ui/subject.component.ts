@@ -30,4 +30,7 @@ private route = inject(ActivatedRoute);
     addNote(value: string) {
     this.notesService.addNote(value, "note", this.SemesterID, this.SubjectID)
     }
+    deleteNote(noteID: string) {
+    this.notesService.deleteNote(this.SemesterID, this.SubjectID,noteID);
+  }
 }

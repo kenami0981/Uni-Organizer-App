@@ -19,4 +19,7 @@ export class TermComponent {
   addSemester(value:string) {
     this.semesterService.addSemester(value);
   }
+  deleteSemester(semesterID: string) {
+    this.semesterService.deleteSemester(semesterID);
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseSubjectService } from '../../secondary/infrastructure/firebase-subject.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -11,17 +11,19 @@ import { RouterLink } from '@angular/router';
     changeDetection: ChangeDetectionStrategy.OnPush ,
     standalone: true})
 export class SemesterComponent {
-    constructor(private router: Router ) {}
+    constructor(private router: Router , private activatedRoute: ActivatedRoute) {}
     private subjectService = inject(FirebaseSubjectService);
-    path: string = "";
     subjects$: any;
+    SemesterID = "";
     ngOnInit(): void {
-        this.path = this.router.url; 
-        this.path =this.path.replace("/semester/","");
-        
-        this.subjects$ = this.subjectService.getSubjects(this.path);   
+        this.SemesterID=this.activatedRoute.snapshot.paramMap.get('semesterId')!;
+        this.subjects$= this.subjectService.getSubjects(this.SemesterID);
     }
     addSubject(SubjectName: string) {
-        this.subjectService.addSubject(SubjectName, this.path);
+        this.subjectService.addSubject(SubjectName, this.SemesterID);
     }
+    deleteSubject(subjectID: string) {
+    this.subjectService.deleteSubject(this.SemesterID, subjectID );
+  }
+    
 }

@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, orderBy, query, serverTimestamp } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, serverTimestamp } from '@angular/fire/firestore';
 import { NotesDTO } from '../../../application/ports/secondary/notes.dto';
 import { Observable } from 'rxjs';
 @Injectable({
@@ -10,7 +10,7 @@ export class FirebaseNotesService {
   private notesRef:any;
   getNotes(semesterID: string, subjectID: string): Observable<NotesDTO[]> {
     this.notesRef = collection(this.firestore, 'semesters/'+semesterID+'/subjects/'+subjectID+'/notes');
-    return collectionData(query(this.notesRef, orderBy('note', 'asc')),{
+    return collectionData(query(this.notesRef, orderBy('createdAt', 'asc')),{
       idField: 'id',
     }) as Observable<NotesDTO[]>;
   }
@@ -22,5 +22,7 @@ export class FirebaseNotesService {
     });
   
   }
+  deleteNote(semesterID: string, subjectID:string, noteID: string) {
+    deleteDoc(doc(this.firestore, 'semesters/'+semesterID+'/subjects/'+subjectID+'/notes/'+noteID));  }
   
 }
