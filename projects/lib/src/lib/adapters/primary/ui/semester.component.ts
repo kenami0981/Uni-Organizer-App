@@ -3,6 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseSubjectService } from '../../secondary/infrastructure/firebase-subject.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { FirebaseSemesterService } from '../../secondary/infrastructure/firebase-semester.service';
+import { Observable } from 'rxjs';
+import { SemesterDTO } from '../../../application/ports/secondary/semester.dto';
+import { SubjectDTO } from '../../../application/ports/secondary/subject.dto';
 @Component({ 
     selector: 'lib-semester', 
     templateUrl: './semester.component.html', 
@@ -13,11 +17,14 @@ import { RouterLink } from '@angular/router';
 export class SemesterComponent {
     constructor(private router: Router , private activatedRoute: ActivatedRoute) {}
     private subjectService = inject(FirebaseSubjectService);
-    subjects$: any;
+    private semesterService = inject(FirebaseSemesterService);
+    subjects$!: Observable<SubjectDTO[]>
     SemesterID = "";
+    semester$!: Observable<SemesterDTO>;
     ngOnInit(): void {
         this.SemesterID=this.activatedRoute.snapshot.paramMap.get('semesterId')!;
         this.subjects$= this.subjectService.getSubjects(this.SemesterID);
+        this.getSemester()
     }
     addSubject(SubjectName: string) {
         this.subjectService.addSubject(SubjectName, this.SemesterID);
@@ -26,8 +33,11 @@ export class SemesterComponent {
     
     this.subjectService.editSubject(this.SemesterID,SubjectID, newNote);
   }
-    deleteSubject(subjectID: string) {
-    this.subjectService.deleteSubject(this.SemesterID, subjectID );
+    deleteSubject(SubjectID: string) {
+    this.subjectService.deleteSubject(this.SemesterID, SubjectID );
   }
+    getSemester() {
+        this.semester$=this.semesterService.getSemesterById(this.SemesterID)
+    }
     
 }
