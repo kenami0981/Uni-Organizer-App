@@ -1,3 +1,6 @@
+<div *ngIf = "subject$ | async as subject">
+    <h1>{{subject.name}}</h1>
+</div>
 <ul>
     <li *ngFor="let note of notes$ | async">{{note.note}}
         <button (click)="deleteNote(note.id)">Delete</button>
