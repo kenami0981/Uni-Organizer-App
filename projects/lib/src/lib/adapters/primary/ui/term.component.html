@@ -1,19 +1,25 @@
-<button id="showAddSemesterBtn" (click)="changeVisibility(0)">Dodaj semestr</button>
-<div id="addSemesterForm" style="visibility: hidden;">
-  <form [formGroup] = "semesterForm" (ngSubmit)="addSemester()">
-    <input formControlName="semester" id="inputAddSemester" placeholder="add semester" type="text"/>
-    <button>Submit</button>
-  </form>
-  
-  
-</div>
 <ul>
       <li *ngFor="let semester of semesters$ | async" class="list">
-        <button [routerLink]="['/semester', semester.id]" class="termBtn">{{ semester.name }}</button>
-        <button (click)="deleteSemester(semester.id)">Delete</button>
-        <input placeholder="Edit Semester" type="text" #inputEdit>
-        <button (click)="editSemester(semester.id, inputEdit.value)">Edit</button>
+        <button *ngIf="editingId !== semester.id" [routerLink]="['/semester', semester.id]" class="termBtn" id="{{semester.id}}">{{ semester.name }}</button>
+        <form *ngIf="editingId === semester.id" [formGroup] = "semesterEditForm" (ngSubmit)="editSemester(semester.id)">
+          <input class='termInput' formControlName="semesterName" id="inputEditSemester" placeholder="edit semester" type="text" value ="{{semester.name}}"/>
+          <button class = "saveBtn">Save</button>
+        </form>
+        <div class="dropdown">
+  <button class="dropbtn">...</button>
+  <div class="dropdown-content">
+    <a (click)="editSemesterButton(semester)">Edit</a>
+    <a (click)="deleteSemester(semester.id)">Delete</a>
+  </div>
+</div>
+        
         
       </li>
     </ul>
-    
+<button id="showAddSemesterBtn" (click)="changeVisibility(0)" class="addBtn">+</button>
+<div id="addSemesterForm" style="visibility: hidden;">
+  <form [formGroup] = "semesterForm" (ngSubmit)="addSemester()">
+    <input class="termInput" formControlName="semester" id="inputAddSemester" placeholder="add semester" type="text"/>
+    <button class="saveBtn">Submit</button>
+  </form>
+</div>    
