@@ -1,5 +1,5 @@
 <div *ngIf = "subject$ | async as subject">
-    <h1>{{subject.name}}</h1>
+    <h1 class="subjectTitle">{{subject.name}}</h1>
 </div>
 <ul>
     <li *ngFor="let note of notes$ | async">{{note.note}}

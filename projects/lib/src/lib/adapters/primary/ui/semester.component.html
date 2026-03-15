@@ -1,14 +1,15 @@
 <div *ngIf="semester$ | async as semester">
-  <h1>{{semester.name}}</h1>
+  <h1 class="semesterTitle">{{semester.name}}</h1>
 </div>
-<ul>
-      <li *ngFor="let subject of subjects$ | async">
-        <button [routerLink]="['subject', subject.id]">{{ subject.name }}</button>
-        <button (click)="deleteSubject(subject.id)">Delete</button>
+<div class="cards-container">
+        <a class="card" *ngFor="let subject of subjects$ | async" [routerLink]="['subject', subject.id]">
+          <div class="card-content">
+        <button class="cardTitle">{{ subject.name }}</button>
+       <!-- <button (click)="deleteSubject(subject.id)">Delete</button>
         <input placeholder="Edit Subejct Name" type="text" #inputEdit>
-        <button (click)="editSubject(subject.id, inputEdit.value)">Edit</button>
-      </li>
-      
-    </ul>
+        <button (click)="editSubject(subject.id, inputEdit.value)">Edit</button>-->
+        </div>
+      </a>
+</div>
     <input placeholder="add subject" type="text" #inputRef>
-    <button (click)="addSubject(inputRef.value)">Dodaj</button>
+    <button (click)="addSubject(inputRef.value); inputRef.value=''">Dodaj</button>
